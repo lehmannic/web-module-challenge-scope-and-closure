@@ -44,6 +44,9 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+Closure is what gives us the ability to put functions together.  It allows child functions to access variables from a higher level scope, even after those variables have been called or terminated. Closure involves code that has been identified elsewhere that we can use later. 
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -65,8 +68,20 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+closure is being used inside the return function within the personalDice function.  You can tell because the const newRoll is inside of a child and only exists there.  This is the reason that we need to return that string with ${newRoll} in it. 
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+The name passed in is always the same ('Dan').  What can change is the value of newRoll. 
+
 c. What is the lexical scope of `newRoll`? 
+
+The lexical scope of 'newRoll' is the return function within the personalDice function; 
+
+
+
+
 
 ### Task 3 - Stretch Goals
 

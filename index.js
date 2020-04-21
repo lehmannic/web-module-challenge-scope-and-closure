@@ -128,8 +128,30 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+
+function getInningScore(inning){
+  let counter = 0;
+  let home = 0; 
+  let away = 0; 
+
+  return function() {
+    counter++; 
+    const runGen = inning(); 
+    home += runGen(); 
+    away += runGen(); 
+    return `${away} - ${home}`
+  }
+}
+
+function scoreboard(getInningScore, inning, num) {
+
+  const innScore = getInningScore(inning); 
+
+  for (let i=0; i<num-1; i++){
+    console.log(`Inning ${i+1}: ${innScore()}`); 
+  }
+
+  return `Final Score: ${innScore()}`
 }
 
 

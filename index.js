@@ -28,9 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * in counter2, count is a global variable. 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * counter1 uses closure.  you can tell because count is declared inside of the function. 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter1 would be preferable if you have multiple games you want to keep a count for.  counter2 would be better if only have one score youre keeping track of and you want to access the score somewhere else in your code. 
  *
 */
 
@@ -56,11 +62,10 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  return Math.floor(Math.random()*3); 
 }
+
 
 /* Task 3: finalScore()
 
@@ -76,10 +81,22 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
 
-  /*Code Here*/
+function finalScore(inning, num){
+  // blank scores to hold inning scores
+  let home = 0; 
+  let away = 0; 
 
+  // add score for each inning up to num 
+  for (i=0; i<num; i++) {
+    home += inning(); 
+    away += inning();
+  }
+
+  const final = {"Home": home, "Away": away};
+
+  // returns object {'home': home_score, 'away': away_score}
+  return final; 
 }
 
 /* Task 4: 
@@ -104,8 +121,29 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+
+function getInningScore(inning){
+
+  let home = 0; 
+  let away = 0; 
+  return function() {
+
+    const runGen = inning(); 
+    home += inning(); 
+    away += inning(); 
+    return `${away} - ${home}`
+  }
+}
+
+function scoreboard(getInningScore, inning, num) {
+
+  const innScore = getInningScore(inning); 
+
+  for (let i=0; i<num-1; i++){
+    console.log(`Inning ${i+1}: ${innScore()}`);
+  }
+
+  return `Final Score: ${innScore()}`
 }
 
 
